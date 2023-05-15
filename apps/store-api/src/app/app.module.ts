@@ -10,13 +10,10 @@ import { SuppliersModule } from './suppliers/suppliers.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AddressModule } from './address/address.module';
 
 @Module({
   imports: [
-    // MongooseModule.forRoot(
-    //   'mongodb+srv://goc_test_user:g2LR4cw9evhP8m2@goc.aojondw.mongodb.net/?retryWrites=true&w=majority',
-    //   { dbName: 'store' }
-    // ),
     ConfigModule.forRoot(),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
@@ -42,6 +39,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     MarketsModule,
     SuppliersModule,
     AuthenticationModule,
+    AddressModule,
   ],
   controllers: [],
   providers: [],

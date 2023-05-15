@@ -6,14 +6,11 @@ import {
   Patch,
   Param,
   Delete,
-  UseInterceptors,
 } from '@nestjs/common';
 import { RolesService } from './roles.service';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { ApiTags } from '@nestjs/swagger';
-import MongooseClassSerializerInterceptor from '../utils/mongooseClassSerializer.interceptor';
-import { Role } from './entities/role.entity';
 
 @ApiTags('Auth')
 @Controller('roles')

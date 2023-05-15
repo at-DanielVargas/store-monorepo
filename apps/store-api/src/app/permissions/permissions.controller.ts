@@ -6,11 +6,13 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { PermissionsService } from './permissions.service';
 import { CreatePermissionDto } from './dto/create-permission.dto';
 import { UpdatePermissionDto } from './dto/update-permission.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { PaginationParams } from '../utils/paginationParams';
 @ApiTags('Auth')
 @Controller('permissions')
 export class PermissionsController {
@@ -22,8 +24,11 @@ export class PermissionsController {
   }
 
   @Get()
-  findAll() {
-    return this.permissionsService.findAll();
+  findAll(
+    @Query() { skip, limit, startId }: PaginationParams,
+    @Query('searchQuery') searchQuery: string
+  ) {
+    return this.permissionsService.findAll(skip, limit, startId, searchQuery);
   }
 
   @Get(':id')

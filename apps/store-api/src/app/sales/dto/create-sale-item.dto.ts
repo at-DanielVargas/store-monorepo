@@ -6,24 +6,22 @@ import { SaleItem } from '../entities/sale-item.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { CreateUserDto } from '../../users/dto/create-user.dto';
 import { CreateMarketDto } from '../../markets/dto/create-market.dto';
-import { CreateSaleItemDto } from './create-sale-item.dto';
-import { UpdateUserDto } from '../../users/dto/update-user.dto';
 
-export class CreateSaleDto {
+export class CreateSaleItemDto {
   @ApiProperty()
   @IsDate()
   @IsNotEmpty()
   date: Date;
 
   @ApiProperty({ type: () => CreateUserDto })
-  @Type(() => UpdateUserDto)
-  customer: UpdateUserDto;
+  @Type(() => User)
+  customer: User;
 
   @ApiProperty({ type: () => CreateMarketDto })
   @Type(() => Market)
   market: Market;
 
   @ApiProperty()
-  @Type(() => CreateSaleItemDto)
+  @Type(() => CreateSaleI)
   items: SaleItem;
 }

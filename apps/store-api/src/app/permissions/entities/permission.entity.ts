@@ -1,14 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Transform } from 'class-transformer';
-import { HydratedDocument, ObjectId } from 'mongoose';
+import { HydratedDocument } from 'mongoose';
 
 export type PermissionDocument = HydratedDocument<Permission>;
 
-@Schema()
+@Schema({ versionKey: false })
 export class Permission {
-  @Transform(({ value }) => value.toString())
-  _id: ObjectId;
-
   @Prop()
   name: string;
 

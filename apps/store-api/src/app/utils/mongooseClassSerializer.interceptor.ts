@@ -9,6 +9,7 @@ import { Document } from 'mongoose';
 function MongooseClassSerializerInterceptor(
   classToIntercept: Type
 ): typeof ClassSerializerInterceptor {
+  console.log(classToIntercept)
   return class Interceptor extends ClassSerializerInterceptor {
     private changePlainObjectToClass(document: PlainLiteralObject) {
       if (!(document instanceof Document)) {

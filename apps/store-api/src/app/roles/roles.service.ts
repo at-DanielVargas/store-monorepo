@@ -19,24 +19,23 @@ export class RolesService {
   ) {}
 
   async create(createRoleDto: CreateRoleDto) {
-    // const permissions = await Promise.all(
-    //   createRoleDto.permissions.map(
-    //     async (permissionData: Permission | ObjectId) => {
-    //       if (!isMongoId(permissionData)) {
-    //         const createdPermission = new this.permissionModel(permissionData);
-    //         return await createdPermission.save();
-    //       }
-    //       return permissionData;
-    //     }
-    //   )
-    // );
+    const permissions = await Promise.all(
+      createRoleDto.permissions.map(
+        async (permissionData: Permission | string) => {
+          if (!isMongoId(permissionData)) {
+            const createdPermission = new this.permissionModel(permissionData);
+            return await createdPermission.save();
+          }
+        }
+      )
+    );
 
-    // const role = new this.roleModel({
-    //   name: createRoleDto.name,
-    //   description: createRoleDto.description,
-    // });
-    // role.permissions = permissions.map((permission) => permission._id);
-    // await role.save();
+    const role = new this.roleModel({
+      name: createRoleDto.name,
+      description: createRoleDto.description,
+    });
+    role.permissions = permissions.map((permission) => String(permission._id));
+    await role.save();
   }
 
   findAll() {

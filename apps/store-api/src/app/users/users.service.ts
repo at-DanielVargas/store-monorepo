@@ -5,6 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './entities/user.entity';
 import { FilterQuery, Model } from 'mongoose';
 import { Role, RoleDocument } from '../roles/entities/role.entity';
+import { Permission } from '../permissions/entities/permission.entity';
 
 @Injectable()
 export class UsersService {
@@ -55,10 +56,12 @@ export class UsersService {
     if (!user) {
       throw new NotFoundException();
     }
-    return user.roles.reduce(
-      (acc, current) => [...acc, current.permissions.map((p) => p.action)],
-      []
-    );
+    console.log(user)
+    return []
+    // return user.roles.reduce(
+    //   (acc, current) => [...acc, current.permissions.map((p: Permission) => p.action)],
+    //   []
+    // );
   }
 
   async create(createUserDto: CreateUserDto) {
